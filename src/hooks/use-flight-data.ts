@@ -8,8 +8,9 @@ async function fetchFlight(
   flightIata: string
 ): Promise<{ data?: FlightData; error?: string }> {
   try {
+    const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
     const res = await fetch(
-      `/api/flights?flight_iata=${encodeURIComponent(flightIata)}`
+      `${baseUrl}/api/flights?flight_iata=${encodeURIComponent(flightIata)}`
     );
     const text = await res.text();
     let json;
