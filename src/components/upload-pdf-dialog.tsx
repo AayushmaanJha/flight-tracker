@@ -50,10 +50,11 @@ export function UploadPdfDialog({ onAddFlights }: UploadPdfDialogProps) {
     setStep("parsing");
 
     try {
+      const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
       const formData = new FormData();
       formData.append("file", file);
 
-      const res = await fetch("/api/parse-pdf", { method: "POST", body: formData });
+      const res = await fetch(`${baseUrl}/api/parse-pdf`, { method: "POST", body: formData });
       const json = await res.json();
 
       if (!res.ok) {
